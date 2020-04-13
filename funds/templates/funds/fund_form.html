@@ -1,0 +1,13 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  <form action="" method="post">
+    {% csrf_token %}
+    <table>
+    {{ form.as_table }}
+    </table>
+    <br>
+    <p> 'End 1 band 2' = the top of band one/bottom of band 2 break (and so on for each band break). Each band has a single charge rate. Leave futher bands empty once you have filled in those that do exist. See my examples or get in touch if you're having trouble.  </p>
+    <input type="submit" value="Submit">
+  </form>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+  
+  <h2>Fund List</h2>
+
+  <ul>
+
+    {% for fund in fund_list %}
+
+      <li><a href="{{ fund.get_absolute_url }}">{{ fund.brand }}</a></li>
+
+     {% endfor %}
+   </ul>
+
+{% endblock %}
+
+  
+   
+
+       
+

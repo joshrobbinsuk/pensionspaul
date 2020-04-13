@@ -1,0 +1,44 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<h3> Enter the initial pot size and number of years to track funds </h3>
+<br>
+
+<form action = "" method = 'GET'> 
+	{{form.as_table}}
+	<button type="submit" >OK</button> 
+</form>
+<br>
+<br>
+<h3> Results </h3>
+<br>
+
+<table border = '1' width = '80%' style='text-align:center;'>
+
+	    <tr>
+	    	<th> Fund </th>
+	    	<th> Pot </th>
+	    	<th> Pot in model </th>
+	    	<th> After setup costs </th>
+	    	<th> After fixed start costs </th>
+	    	<th> After drawdown </th>
+	    	<th> After ongoing costs </th>
+	    	<th> After growth </th> 
+
+	{% for fund in funds %}
+        <tr>
+            <td>{{ fund.brand }}</td>
+            <td>{{ pot_size }}</td>
+            <th> {{ fund.starting_pot }}</th>
+            <td>{{ fund.method_setup_costs }}</td>
+           <<td>{{ fund.method_fixed_start_costs }}</td>
+            <td>{{ fund.method_drawdown }}</td>
+            <td>{{ fund.method_ongoing_costs }}</td>
+            <td>{{ fund.method_growth }}</td> 
+        </tr>
+    {% endfor %}
+</table>
+  
+
+{% endblock %}

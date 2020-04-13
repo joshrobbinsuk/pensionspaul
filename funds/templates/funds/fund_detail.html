@@ -1,0 +1,74 @@
+{% extends "base_generic.html" %}
+
+{% block content %}  
+
+  <h1>Fund: {{fund}}</h1>
+
+<table>
+
+        <tr>
+            <td>Fund type:</td>
+            <td>{{ fund.get_fund_type_display }}</td>
+        </tr>
+         <tr>
+            <td>Setup costs:</td>
+            <td>{{ fund.setup_costs }}</td>
+        </tr>
+        <tr>
+            <td>Fixed costs year start:</td>
+            <td>{{ fund.fixed_costs_year_start }}</td>
+        </tr>
+        <tr>
+            <td>Fixed costs ongoing:</td>
+            <td>{{ fund.fixed_costs_ongoing}}</td>
+        </tr>
+</table>
+<br>
+<table width = 60%>
+	<tr>
+		<td> Platform type: </td>
+		<td> {{fund.get_platform_type_display}} </td>
+	</tr>
+	<tr>
+		<td> Band 1 starting value:</td> 
+		<td> £{{fund.band_1_lower}} </td>
+		<td> Band 1 rate: </td>
+		<td> {{fund.band_1_rate}}% </td>
+	</tr>
+	<tr>
+		<td> Band 2 starting value:</td> 
+		<td> £{{fund.end_1_band_2}} </td>
+		<td> Band 2 rate: </td>
+		<td> {{fund.band_2_rate}}% </td>
+	</tr>
+	<tr>
+		<td> Band 3 starting value:</td> 
+		<td> £{{fund.end_2_band_3}} </td>
+		<td> Band 3 rate: </td>
+		<td> {{fund.band_3_rate}}% </td>
+	</tr>
+	<tr>
+		<td> Band 4 starting value:</td> 
+		<td> £{{fund.end_3_band_4}} </td>
+		<td> Band 4 rate: </td>
+		<td> {{fund.band_4_rate}}% </td>
+	</tr>
+	<tr>
+		<td> Band 5 starting value:</td> 
+		<td> £{{fund.end_4_band_5}} </td>
+		<td> Band 5 rate: </td>
+		<td> {{fund.band_5_rate}}% </td>
+	</tr>
+		<tr>
+		<td> Band 6 starting value:</td> 
+		<td> £{{fund.end_5_band_6}} </td>
+		<td> Band 6 rate: </td>
+		<td> {{fund.band_6_rate}}% </td>
+	</tr>
+</table>
+<br>
+<p><a href="{% url 'fund-update' fund.pk %}"> Change details </a></p>
+<p><a href="{% url 'fund-delete' fund.pk %}"> Delete fund </a></p>
+
+
+{% endblock %}

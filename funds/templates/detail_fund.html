@@ -1,0 +1,46 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<h3> Enter the brand and pot size to track fund </h3>
+<br>
+
+<form action = "" method = 'GET'>
+<!-- <input type='hidden' name='format' value='notcsv'>  -->
+	{{form.as_table}}
+<button type="submit" name='html' >GET RESULTS</button> 
+{% if fund %}
+<button type="submit" name="csv"> DOWNLOAD</button> 
+{% endif %}
+</form>
+<br>
+<br>
+<br>
+<h3> Results </h3>
+<br>
+<table border = '1' width = '80%' style='text-align:center;'>
+
+	    <tr>
+	       <th> Year </th>
+	    	<th> Pot </th>
+	    	<th> After setup costs </th>
+	    	<th> After fixed start costs </th>
+	    	<th> After drawdown </th>
+	    	<th> After ongoing costs </th>
+	    	<th> After growth </th> 
+
+{% for tup in fund.final_tuple %}
+        <tr>
+        	<td> {{ tup.0 }} </td>
+            <td> {{ tup.1 }} </td>
+          <td>{{ tup.2 }}</td>
+           <td>{{ tup.3 }}</td>
+            <td>{{ tup.4 }}</td>
+            <td>{{ tup.5 }}</td>
+            <td>{{ tup.6 }}</td> 
+        </tr>
+{% endfor %}
+
+</table>
+
+{% endblock %}

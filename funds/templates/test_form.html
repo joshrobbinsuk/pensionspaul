@@ -1,0 +1,16 @@
+
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+<!-- https://www.geeksforgeeks.org/render-html-forms-get-post-in-django/ -->
+
+<form action = "" method = 'GET'> 
+    <label for="your_name">Your name: </label> 
+    <input id="your_name" type="text" name="your_name"> 
+       <label for="your_age">Your age: </label> 
+    <input id="your_age" type="text" name="your_age"> 
+    <input type="submit" value="OK"> 
+</form> 
+
+{% endblock %}

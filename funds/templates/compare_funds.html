@@ -1,0 +1,37 @@
+{% extends 'base_generic.html' %}
+
+{% block content %}
+
+{% load ordering_tag %}
+
+<h3> Enter the initial pot size and number of years to compare funds </h3>
+<br>
+
+<form action = "" method = 'GET'> 
+	{{form.as_table}}
+	<button type="submit" >OK</button> 
+</form>
+<br>
+<br>
+<h3> Fund comparisons </h3>
+<br>
+
+<table border = '1' width = '40%' style='text-align:center;'>
+
+	    <tr>
+	    	<th> Fund </th>
+	    	<th> Final Pot </th>
+	    	<!--<th> Get detailed view </th>-->
+
+	{% for fund in funds %}
+        <tr>
+            <td><a href="{{ fund.get_absolute_url }}">{{ fund.brand }}</a></td>
+            <td>{{ fund.daddy_method }}</td>
+            <!--<td><a href="{% url 'detailed-view' %}/?brand=LV&pot_size=22"> GET</a></td>-->
+
+        </tr>
+    {% endfor %}
+</table>
+  
+
+{% endblock %}
