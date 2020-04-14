@@ -15,30 +15,32 @@ class Fund(models.Model):
 
 	FUND_CHOICES = (
 	('p', 'Pension Company'),
-	('f', 'Fund Supermarket')
+	('f', 'Fund Supermarket'),
+	('wp', 'Wrap Fund')
 		)
-	fund_type = models.CharField(max_length=1,choices=FUND_CHOICES,default='p')
+	fund_type = models.CharField(max_length=2,choices=FUND_CHOICES,default='p')
 	setup_costs = models.DecimalField(max_digits=9, decimal_places=2,default=0)
 	fixed_costs_year_start = models.DecimalField(max_digits=9, decimal_places=2,default=0)
 	fixed_costs_ongoing = models.DecimalField(max_digits=9, decimal_places=2,default=0)
 	PLATFORM_CHOICES = (
 		('itb', 'ITB'),
 		('wf', 'Whole Fund'),
-		('n', 'Neither')
+		('n', 'None of the above')
 		)
+
 	platform_type = models.CharField(max_length=3,choices=PLATFORM_CHOICES,default='itb')	
-	band_1_lower = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True, default=0)
-	band_1_rate = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	end_1_band_2 = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	band_2_rate = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	end_2_band_3 = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	band_3_rate = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	end_3_band_4 = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	band_4_rate = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	end_4_band_5 = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	band_5_rate = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	end_5_band_6 = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
-	band_6_rate = models.DecimalField(max_digits=9, decimal_places=2, null=True, blank = True)
+	band_1_lower = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True, default=0)
+	band_1_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_1_band_2 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	band_2_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_2_band_3 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	band_3_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_3_band_4 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	band_4_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_4_band_5 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	band_5_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_5_band_6 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	band_6_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
 
 	def __str__(self):
 		return self.brand
@@ -108,7 +110,7 @@ class Fund(models.Model):
 
 			if self.end_4_band_5 is not None: 
 				if pot > self.end_4_band_5:
-					platform_costs += (pot - self.end_4_band_6) * self.band_5_rate/100
+					platform_costs += (pot - self.end_4_band_5) * self.band_5_rate/100
 					pot = self.end_4_band_5
 
 			if self.end_3_band_4 is not None: 
