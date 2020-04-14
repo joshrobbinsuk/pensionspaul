@@ -72,6 +72,7 @@ def CompareFunds(request):
 		funds = sorted(Fund.objects.all(), key=lambda p: p.daddy_property, reverse = True)
 		for f in funds:
 			f.starting_pot = pot_size
+			# f.costs_accrued = 0
 
 		return render(request, 'compare_funds.html', {'form': form_a,'pot_size':pot_size, 'years':years, 'funds':funds})
 	

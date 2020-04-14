@@ -21,12 +21,14 @@
 	    <tr>
 	    	<th> Fund </th>
 	    	<th> Final Pot </th>
+	    	<th> Total Costs </th>
 	    	<!--<th> Get detailed view </th>-->
 
 	{% for fund in funds %}
         <tr>
             <td><a href="{{ fund.get_absolute_url }}">{{ fund.brand }}</a></td>
             <td>{{ fund.daddy_method }}</td>
+            <td>{{ fund.costs_accrued }}</td>
             <!--<td><a href="{% url 'detailed-view' %}/?brand=LV&pot_size=22"> GET</a></td>-->
 
         </tr>

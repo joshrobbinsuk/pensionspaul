@@ -54,15 +54,18 @@ class Fund(models.Model):
 	#####################
 
 	starting_pot = None
+	costs_accrued = 0
 
 	def method_setup_costs(self):
 		if self.tracking_years == 1:
+			self.costs_accrued += self.setup_costs
 			new_pot = self.starting_pot - self.setup_costs
 			return new_pot
 		else:
 			return '-'
 
 	def method_fixed_start_costs(self):
+		self.costs_accrued += self.fixed_costs_year_start
 		if self.tracking_years == 1:
 			new_pot = self.method_setup_costs() - self.fixed_costs_year_start
 			return new_pot
@@ -132,6 +135,8 @@ class Fund(models.Model):
 		else:
 			platform_costs = 0
 
+		self.costs_accrued += platform_costs + self.fixed_costs_ongoing
+		self.costs_accrued =self.costs_accrued.quantize(TWOPLACES)
 		new_pot = original_pot - platform_costs - self.fixed_costs_ongoing
 		new_pot_rounded = new_pot.quantize(TWOPLACES)
 		return new_pot_rounded
