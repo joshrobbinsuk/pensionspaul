@@ -178,7 +178,7 @@ class Fund(models.Model):
 			self.setup_tracker.append(self.method_setup_costs())
 			self.fixed_tracker.append(self.method_fixed_start_costs())
 			self.drawdown_tracker.append(self.method_drawdown())
-			self.ongoing_tracker.append(self.method_drawdown())
+			self.ongoing_tracker.append(self.method_ongoing_costs())
 			self.growth_tracker.append(self.method_growth())
 			self.starting_pot = self.method_growth()
 
