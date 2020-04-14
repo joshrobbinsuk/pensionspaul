@@ -29,17 +29,17 @@ class Fund(models.Model):
 		)
 
 	platform_type = models.CharField(max_length=3,choices=PLATFORM_CHOICES,default='itb')	
-	band_1_lower = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True, default=0)
+	band_1_lower = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank = True, default=0)
 	band_1_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
-	end_1_band_2 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_1_band_2 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank = True)
 	band_2_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
-	end_2_band_3 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_2_band_3 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank = True)
 	band_3_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
-	end_3_band_4 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_3_band_4 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank = True)
 	band_4_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
-	end_4_band_5 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_4_band_5 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank = True)
 	band_5_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
-	end_5_band_6 = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
+	end_5_band_6 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank = True)
 	band_6_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
 
 	def __str__(self):
