@@ -170,7 +170,7 @@ class Fund(models.Model):
 			self.costs_accrued = self.costs_accrued.quantize(TWOPLACES)
 
 			self.tracking_years += 1
-          
+		self.costs_accrued -= self.setup_costs * (self.comparison_years - 1) 
 		return(new_pot)
         
 	@property
