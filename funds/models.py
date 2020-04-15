@@ -29,6 +29,11 @@ class Fund(models.Model):
 		)
 
 	platform_type = models.CharField(max_length=3,choices=PLATFORM_CHOICES,default='itb')	
+	GROWTH_TYPE_CHOICES = (
+		('n', 'Normal'),
+		('s', 'Special')
+		)
+	growth_type = models.CharField(max_length=1,choices=GROWTH_TYPE_CHOICES,default='n')	
 	band_1_lower = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank = True, default=0)
 	band_1_rate = models.DecimalField(max_digits=10, decimal_places=3, null=True, blank = True)
 	end_1_band_2 = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank = True)
@@ -55,6 +60,9 @@ class Fund(models.Model):
 
 	starting_pot = None
 	costs_accrued = 0
+	fund_costs = 0
+	def total_costs(self):
+	 return self.costs_accrued + self.fund_costs
 
 	def method_setup_costs(self):
 		if self.tracking_years == 1:
@@ -142,6 +150,8 @@ class Fund(models.Model):
 		return new_pot_rounded
 
 	def method_growth(self):
+		self.fund_costs += self.method_ongoing_costs() * Decimal(0.7)/100
+		self.fund_costs = self.fund_costs.quantize(TWOPLACES)
 		new_pot = self.method_ongoing_costs() * Decimal(103.3)/100
 		return new_pot.quantize(TWOPLACES)
 

@@ -73,6 +73,7 @@ def CompareFunds(request):
 		for f in funds:
 			f.starting_pot = pot_size
 			f.costs_accrued = 0
+			f.fund_costs = 0
 
 		return render(request, 'compare_funds.html', {'form': form_a,'pot_size':pot_size, 'years':years, 'funds':funds})
 	
