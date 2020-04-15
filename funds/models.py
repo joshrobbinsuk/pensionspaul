@@ -150,14 +150,20 @@ class Fund(models.Model):
 
 
 	def method_growth(self):
-		self.fund_costs += self.method_ongoing_costs() * Decimal(0.7)/100
-		self.fund_costs = self.fund_costs.quantize(TWOPLACES)
-		new_pot = self.method_ongoing_costs() * Decimal(103.3)/100
-		return new_pot.quantize(TWOPLACES)
+		if self.growth_type == 'n':
+			self.fund_costs += self.method_ongoing_costs() * Decimal(0.7)/100
+			self.fund_costs = self.fund_costs.quantize(TWOPLACES)
+			new_pot = self.method_ongoing_costs() * Decimal(103.3)/100
+			return new_pot.quantize(TWOPLACES)
+		else:
+			new_pot = self.method_ongoing_costs() * Decimal(104)/100
+			return new_pot.quantize(TWOPLACES)
+
+
 
 ###### DADDY METHOD
 	
-	tracking_years = None
+	tracking_years = 1
 	comparison_years = None
     
 

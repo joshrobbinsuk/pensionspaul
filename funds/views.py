@@ -105,7 +105,19 @@ def DetailedFund(request):
 		pot_size = int(request.GET['pot_size'])
 		fund = Fund.objects.filter(brand = brand).get()
 		fund.starting_pot = pot_size
+		print(fund.platform_type)
+		print(fund.method_drawdown())
+		print(fund.method_drawdown() * fund.band_3_rate/100)
+		print(fund.platform_costs)
+		pot = fund.method_drawdown()
+		print(pot > fund.end_1_band_2)
+		print(pot > fund.end_2_band_3)
+		print(pot > fund.end_3_band_4)
+		print(pot > fund.end_4_band_5)
+
 		fund.mummy_method()
+
+		print(fund.platform_costs)
 
 		if 'csv' in request.GET:
 			fund = Fund.objects.filter(brand = brand).get()
