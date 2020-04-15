@@ -22,15 +22,16 @@
             <td>Fixed costs ongoing:</td>
             <td>{{ fund.fixed_costs_ongoing}}</td>
         </tr>
+        <tr>
+		<td> Platform type: </td>
+		<td> {{fund.get_platform_type_display}} </td>
+        </tr>
+        <tr>
+		<td> Growth type: </td>
+		<td> {{fund.get_growth_type_display}} </td> 
 </table>
 <br>
 <table width = 60%>
-	<tr>
-		<td> Platform type: </td>
-		<td> {{fund.get_platform_type_display}} </td>
-		<td> Growth type: </td>
-		<td> {{fund.get_growth_type_display}} </td>
-	</tr>
 	<tr>
 		<td> Band 1 starting value:</td> 
 		<td> £{{fund.band_1_lower}} </td>
