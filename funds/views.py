@@ -68,12 +68,28 @@ def CompareFunds(request):
 		Fund.starting_pot = pot_size
 		Fund.comparison_years = years
 
-		#funds = Fund.objects.all()
+		# funds = Fund.objects.all()
+		# f = funds[2]
+		# print(f.comparison_years)
+		# print(f.setup_costs)
+		# print(f.fixed_costs_year_start)
+		# print(f.platform_costs)
+		# print(f.fixed_costs_ongoing)
+		# print(f.costs_accrued)
+		# f.daddy_property
+		# print(f.brand)
+		# print(f.setup_costs)
+		# print(f.fixed_costs_year_start)
+		# print(f.platform_costs)
+		# print(f.fixed_costs_ongoing)
+		# print(f.costs_accrued)
+
 		funds = sorted(Fund.objects.all(), key=lambda p: p.daddy_property, reverse = True)
 		for f in funds:
 			f.starting_pot = pot_size
 			f.costs_accrued = 0
 			f.fund_costs = 0
+			f.platform_costs = 0
 
 		return render(request, 'compare_funds.html', {'form': form_a,'pot_size':pot_size, 'years':years, 'funds':funds})
 	

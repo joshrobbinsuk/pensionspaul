@@ -66,14 +66,12 @@ class Fund(models.Model):
 
 	def method_setup_costs(self):
 		if self.tracking_years == 1:
-			self.costs_accrued += self.setup_costs
 			new_pot = self.starting_pot - self.setup_costs
 			return new_pot
 		else:
 			return '-'
 
 	def method_fixed_start_costs(self):
-		self.costs_accrued += self.fixed_costs_year_start
 		if self.tracking_years == 1:
 			new_pot = self.method_setup_costs() - self.fixed_costs_year_start
 			return new_pot
@@ -85,9 +83,11 @@ class Fund(models.Model):
 		new_pot = self.method_fixed_start_costs() * Decimal(95)/100
 		return new_pot.quantize(TWOPLACES)
 
+	platform_costs = 0
 	def method_ongoing_costs(self):
 		pot = self.method_drawdown()
 		original_pot = pot
+		platform_costs = 0
 
 		if self.platform_type == 'wf':
 			platform_costs = pot * self.band_1_rate/100
@@ -113,7 +113,6 @@ class Fund(models.Model):
 					platform_costs = pot * self.band_6_rate/100
 
 		elif self.platform_type == 'itb':
-			platform_costs = 0
 			if self.end_5_band_6 is not None: 
 				if pot > self.end_5_band_6:
 					platform_costs += (pot - self.end_5_band_6) * self.band_6_rate/100
@@ -143,11 +142,12 @@ class Fund(models.Model):
 		else:
 			platform_costs = 0
 
-		self.costs_accrued += platform_costs + self.fixed_costs_ongoing
-		self.costs_accrued =self.costs_accrued.quantize(TWOPLACES)
+		self.platform_costs = platform_costs
+
 		new_pot = original_pot - platform_costs - self.fixed_costs_ongoing
 		new_pot_rounded = new_pot.quantize(TWOPLACES)
 		return new_pot_rounded
+
 
 	def method_growth(self):
 		self.fund_costs += self.method_ongoing_costs() * Decimal(0.7)/100
@@ -166,16 +166,18 @@ class Fund(models.Model):
 		while self.tracking_years <= self.comparison_years:
 			new_pot = self.method_growth()
 			self.starting_pot = new_pot
+			self.costs_accrued += self.setup_costs + self.fixed_costs_year_start + self.fixed_costs_ongoing + self.platform_costs
+			self.costs_accrued = self.costs_accrued.quantize(TWOPLACES)
 
 			self.tracking_years += 1
-
+          
 		return(new_pot)
-
+        
 	@property
 	def daddy_property(self):
 		return self.daddy_method()
 	
-	daddy_property = property(daddy_method)
+	#daddy_property = property(daddy_method)
 
 
 	def mummy_method(self):
