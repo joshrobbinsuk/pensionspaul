@@ -118,7 +118,7 @@ def DetailedFund(request):
 			filename_ = str(brand) + str(pot_size)
 			writer.writerow(['Year','Pot','After setup costs','After fixed start costs','After drawdown',
 								'After ongoing costs','After growth'])
-			_filename = str(brand) + "_£" + str(pot_size)
+			_filename = str(brand) + "_£" + str(pot_size) +'.csv'
 			for tup in fund.final_tuple:
 				writer.writerow([tup[0],tup[1],tup[2],tup[3],tup[4],tup[5],tup[6]])
 			response['Content-Disposition'] = 'attachment; filename=' + _filename
