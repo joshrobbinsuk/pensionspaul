@@ -16,6 +16,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 
 import csv
 
+test git = 2
 
 class FundDetailView(LoginRequiredMixin,generic.DetailView):
 	model = Fund
