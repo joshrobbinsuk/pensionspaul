@@ -24,7 +24,9 @@
 	    	<th> Non Fund Costs </th>
 	    	<th> Fund Costs </th>
 	    	<th> All Costs </th>
-	    	<!--<th> Get detailed view </th>-->
+	    	<th> Drawn Out </th>
+	    	<th> Growth Accrued </th>
+
 
 	{% for fund in funds %}
         <tr>
@@ -32,7 +34,11 @@
             <td>{{ fund.daddy_method }}</td>
             <td>{{ fund.costs_accrued }}</td>
             <td>{{ fund.fund_costs }}</td>
-            <td>{{ fund.total_costs}}</td>
+            <td>{{ fund.total_costs }}</td>
+              <td>{{ fund.drawn_out }}</td>
+            <td>{{ fund.growth_accrued }}</td>
+
+
             <!--<td><a href="{% url 'detailed-view' %}/?brand=LV&pot_size=22"> GET</a></td>-->
 
         </tr>
