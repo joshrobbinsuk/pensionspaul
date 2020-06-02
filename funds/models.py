@@ -61,8 +61,10 @@ class Fund(models.Model):
 	starting_pot = None
 	costs_accrued = 0
 	fund_costs = 0
+	growth_accrued = 0
+	drawn_out = 0
 	def total_costs(self):
-	 return self.costs_accrued + self.fund_costs
+		return self.costs_accrued + self.fund_costs
 
 	def method_setup_costs(self):
 		if self.tracking_years == 1:
@@ -79,8 +81,9 @@ class Fund(models.Model):
 			new_pot = self.starting_pot - self.fixed_costs_year_start
 			return new_pot
 
+	drawdown_pc = None
 	def method_drawdown(self):
-		new_pot = self.method_fixed_start_costs() * Decimal(95)/100
+		new_pot = self.method_fixed_start_costs() * Decimal(100 - self.drawdown_pc)/100
 		return new_pot.quantize(TWOPLACES)
 
 	platform_costs = 0
@@ -154,10 +157,16 @@ class Fund(models.Model):
 			self.fund_costs += self.method_ongoing_costs() * Decimal(0.7)/100
 			self.fund_costs = self.fund_costs.quantize(TWOPLACES)
 			new_pot = self.method_ongoing_costs() * Decimal(103.3)/100
+			self.growth_accrued += self.method_ongoing_costs() * Decimal(4)/100 
 			return new_pot.quantize(TWOPLACES)
+
 		else:
 			new_pot = self.method_ongoing_costs() * Decimal(104)/100
+			self.growth_accrued += self.method_ongoing_costs() * Decimal(4)/100
+			print(self.brand)
+			print(self.growth_accrued)
 			return new_pot.quantize(TWOPLACES)
+
 
 
 
@@ -171,12 +180,18 @@ class Fund(models.Model):
 		self.tracking_years = 1
 		while self.tracking_years <= self.comparison_years:
 			new_pot = self.method_growth()
-			self.starting_pot = new_pot
+	
+
 			self.costs_accrued += self.setup_costs + self.fixed_costs_year_start + self.fixed_costs_ongoing + self.platform_costs
 			self.costs_accrued = self.costs_accrued.quantize(TWOPLACES)
+			self.growth_accrued = self.growth_accrued.quantize(TWOPLACES)
+			self.drawn_out += self.method_fixed_start_costs() * Decimal(self.drawdown_pc)/100
+			self.drawn_out = self.drawn_out.quantize(TWOPLACES)
 
+			self.starting_pot = new_pot
 			self.tracking_years += 1
-		self.costs_accrued -= self.setup_costs * (self.comparison_years - 1) 
+
+		self.costs_accrued -= self.setup_costs * (self.comparison_years - 1) # only year one setup costs
 		return(new_pot)
         
 	@property

@@ -65,8 +65,10 @@ def CompareFunds(request):
 	if request.GET != {}:
 		pot_size =  int(request.GET['pot_size'])
 		years = int(request.GET['years'])
+		drawdown = int(request.GET['drawdown'])
 		Fund.starting_pot = pot_size
 		Fund.comparison_years = years
+		Fund.drawdown_pc = drawdown
 
 		# funds = Fund.objects.all()
 		# f = funds[2]
@@ -90,6 +92,8 @@ def CompareFunds(request):
 			f.costs_accrued = 0
 			f.fund_costs = 0
 			f.platform_costs = 0
+			f.growth_accrued = 0
+			f.drawn_out = 0
 
 		return render(request, 'compare_funds.html', {'form': form_a,'pot_size':pot_size, 'years':years, 'funds':funds})
 	
@@ -103,22 +107,23 @@ def DetailedFund(request):
 	if request.GET:
 		brand = request.GET['brand']
 		pot_size = int(request.GET['pot_size'])
+		drawdown = int(request.GET['drawdown'])
 		fund = Fund.objects.filter(brand = brand).get()
 		fund.starting_pot = pot_size
+		fund.drawdown_pc = drawdown
 		fund.mummy_method()
-
-		print(fund.platform_costs)
 
 		if 'csv' in request.GET:
 			fund = Fund.objects.filter(brand = brand).get()
 			fund.starting_pot = pot_size
+			fund.drawdown_pc = drawdown
 			fund.mummy_method()
 			response = HttpResponse(content_type='text/csv')
 			writer = csv.writer(response)
 			filename_ = str(brand) + str(pot_size)
 			writer.writerow(['Year','Pot','After setup costs','After fixed start costs','After drawdown',
 								'After ongoing costs','After growth'])
-			_filename = str(brand) + "_£" + str(pot_size) +'.csv'
+			_filename = str(brand) + "_£" + str(pot_size) + '_%' + str(drawdown) + '.csv'
 			for tup in fund.final_tuple:
 				writer.writerow([tup[0],tup[1],tup[2],tup[3],tup[4],tup[5],tup[6]])
 			response['Content-Disposition'] = 'attachment; filename=' + _filename
