@@ -24,6 +24,7 @@ SECRET_KEY = "d054ashr@2_wjn!+2%f4*)vn4y$tn7s0=z_%v1-o1=jzp2sh#l"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
+DEBUG_PROPAGATE_EXCEPTIONS = True
 
 ALLOWED_HOSTS = ["pensionspaul.herokuapp.com", "127.0.0.1"]
 
@@ -133,7 +134,7 @@ STATIC_URL = "/static/"
 
 # # Simplified static file serving.
 # https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # drf
 REST_FRAMEWORK = {
