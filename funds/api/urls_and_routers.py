@@ -1,6 +1,10 @@
 from rest_framework import routers
-from funds.api import views
+from .views import compare_funds_api  # CompareFundsList     # FundViewSet
+from django.urls import path, include
 
-router = routers.DefaultRouter()
+# router = routers.DefaultRouter()
+# router.register(r'funds', FundViewSet)
 
-router.register(r'funds', views.FundViewSet)
+urls = [
+    path("", compare_funds_api, name="api"),
+]

@@ -23,6 +23,10 @@
           <li><a href="{% url 'compare-funds' %}">Compare Funds</a></li>
           <li><a href="{% url 'detailed-view' %}">Detailed Fund View</a></li>
           <br>
+
+          <li><a href="{% url 'api' %}">API</a></li>
+          <br>
+
           {% if user.is_authenticated %} 
           <li>User: {{ user.get_username }}</li>
           <li><a href="{% url 'logout'%}?next={{request.path}}">Logout</a></li>

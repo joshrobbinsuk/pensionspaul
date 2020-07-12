@@ -4,14 +4,15 @@
 
 {% load ordering_tag %}
 
-<h3> Enter the initial pot size and number of years to compare funds </h3>
-<br>
+<h3> Enter values to compare funds </h3>
+<p> Pot size (£), drawdown (%) - use whole numbers </p>
 
 <form action = "" method = 'GET'> 
 	{{form.as_table}}
 	<button type="submit" >OK</button> 
 </form>
 <br>
+<p> Growth set to 4% per annum for all funds </p>
 <br>
 <h3> Fund comparisons </h3>
 <br>
@@ -38,8 +39,6 @@
               <td>{{ fund.drawn_out }}</td>
             <td>{{ fund.growth_accrued }}</td>
 
-
-            <!--<td><a href="{% url 'detailed-view' %}/?brand=LV&pot_size=22"> GET</a></td>-->
 
         </tr>
     {% endfor %}

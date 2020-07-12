@@ -6,13 +6,17 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('funds', '0008_auto_20200409_1507'),
+        ("funds", "0008_auto_20200409_1507"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='fund',
-            name='platform_type',
-            field=models.CharField(choices=[('itb', 'ITB'), ('wf', 'Whole Fund'), ('n', 'Neither')], default='itb', max_length=3),
+            model_name="fund",
+            name="platform_type",
+            field=models.CharField(
+                choices=[("itb", "ITB"), ("wf", "Whole Fund"), ("n", "Neither")],
+                default="itb",
+                max_length=3,
+            ),
         ),
     ]

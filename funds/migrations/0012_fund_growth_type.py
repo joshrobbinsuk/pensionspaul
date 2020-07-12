@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('funds', '0011_auto_20200414_0900'),
+        ("funds", "0011_auto_20200414_0900"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='fund',
-            name='growth_type',
-            field=models.CharField(choices=[('n', 'Normal'), ('s', 'Special')], default='n', max_length=1),
+            model_name="fund",
+            name="growth_type",
+            field=models.CharField(
+                choices=[("n", "Normal"), ("s", "Special")], default="n", max_length=1
+            ),
         ),
     ]

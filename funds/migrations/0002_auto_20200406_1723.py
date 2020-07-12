@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('funds', '0001_initial'),
+        ("funds", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='fund',
-            name='band_1_rate',
-            field=models.DecimalField(decimal_places=2, help_text='enter band one rate', max_digits=5),
+            model_name="fund",
+            name="band_1_rate",
+            field=models.DecimalField(
+                decimal_places=2, help_text="enter band one rate", max_digits=5
+            ),
         ),
     ]
